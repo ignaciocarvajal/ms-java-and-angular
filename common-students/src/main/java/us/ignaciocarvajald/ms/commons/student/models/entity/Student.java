@@ -1,4 +1,4 @@
-package us.ignaciocarvajald.ms.app.users.models.entity;
+package us.ignaciocarvajald.ms.commons.student.models.entity;
 
 
 
