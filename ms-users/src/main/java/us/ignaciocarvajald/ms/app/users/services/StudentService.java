@@ -1,17 +1,9 @@
 package us.ignaciocarvajald.ms.app.users.services;
 
-import java.util.Optional;
-
 import us.ignaciocarvajald.ms.app.users.models.entity.Student;
+import us.ignaciocarvajald.ms.commons.services.CommonService;
 
-public interface StudentService {
+public interface StudentService extends CommonService<Student>{
 	
-	public Iterable<Student> findAll();
-
-	public Optional<Student> findById(Long id);
-
-	public Student save(Student student);
-
-	public void deleteById(Long id);
 
 }
