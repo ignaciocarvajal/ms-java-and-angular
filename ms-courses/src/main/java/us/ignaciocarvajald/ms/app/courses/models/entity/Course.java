@@ -1,17 +1,27 @@
 package us.ignaciocarvajald.ms.app.courses.models.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import us.ignaciocarvajald.ms.commons.student.models.entity.Student;
+
+/**
+ * @author ignacio
+ *
+ */
 @Entity
 @Table(name = "courses")
 public class Course {
@@ -23,11 +33,21 @@ public class Course {
 	@Column(name = "create_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createAt;
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<Student> students;
 
 	@PrePersist
 	public void prePersist() {
 		this.createAt = new Date();
 	}
+	
+	
+
+	public Course() {
+		this.students = new ArrayList<>();
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -52,5 +72,24 @@ public class Course {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
+	
+	public void addStudent(Student student) {
+		this.students.add( student);
+	}
+	
+	public void removeStudent(Student student) {
+		this.students.remove( student);
+	}
+	
+	
 
 }
