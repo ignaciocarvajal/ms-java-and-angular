@@ -2,17 +2,17 @@ package us.ignaciocarvajald.ms.app.users.controllers;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import us.ignaciocarvajald.ms.app.users.models.entity.Student;
 import us.ignaciocarvajald.ms.app.users.services.StudentService;
 import us.ignaciocarvajald.ms.commons.controllers.CommonController;
+import us.ignaciocarvajald.ms.commons.student.models.entity.Student;
 
 @RestController
 public class StudentController extends CommonController<Student, StudentService> {
@@ -30,6 +30,13 @@ public class StudentController extends CommonController<Student, StudentService>
 		studentStorage.setEmail(student.getEmail());
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(studentStorage));
+
+	}
+
+	@GetMapping("/filter/{term}")
+	public ResponseEntity<?> searchByTerm(@PathVariable String term) {
+
+		return ResponseEntity.ok(service.findByNameOrLastname(term));
 
 	}
 
