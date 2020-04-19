@@ -73,4 +73,20 @@ public class Student {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		
+		if(!(obj instanceof Student)) {
+			return false;
+		}
+		
+		Student student = (Student) obj;
+		return this.id != null && this.id.equals(student.getId());
+	}
+	
+	
 }
